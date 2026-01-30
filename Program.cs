@@ -10,8 +10,12 @@ namespace randomProgram
     static void Main(string[] args)
     {
 
-      mostrarBienvenida();
-        
+        mostrarBienvenida();
+        Thread.Sleep(3000);
+        Console.Clear();
+        menuPrincipal();
+      
+
 
     }
 
@@ -37,13 +41,8 @@ namespace randomProgram
         Console.WriteLine(" ===========================================================");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\n [SISTEMA CARGADO CORRECTAMENTE]");
-            //limpia la consola despues de 2 segundos
-            await Task.Delay(2000);
-
-            Console.Clear();
-
-            menuPrincipal();
+        Console.WriteLine("\n [Cargando.... Espere...]");
+        
         }
 
     static void menuPrincipal()
@@ -62,12 +61,13 @@ namespace randomProgram
 
          Console.WriteLine("\n [MENÚ PRINCIPAL]"); 
          Console.WriteLine(" Opción 1: Sumar");
-         Console.WriteLine(" Opción 2: contar hasta tu edad");
+         Console.WriteLine(" Opción 2: Contar hasta tu edad");
+         Console.WriteLine(" Opción 4: Adivina el numero");
          Console.WriteLine(" Opción 3: Salir");
 
-        while (opcion < 1 || opcion > 3)
+        while (opcion < 1 || opcion > 4)
         {
-            Console.Write("Ingrese su opción (1-3): ");
+            Console.Write("Ingrese su opción (1-4): ");
             opcion = Convert.ToInt32(Console.ReadLine());
         }
 
@@ -87,7 +87,12 @@ namespace randomProgram
                 Console.Clear();
                 Console.WriteLine("\n Saliendo del programa. ¡Hasta luego!");
                 break;
-        }
+            case 4:
+                    Console.Clear();
+                Console.WriteLine(@"Has seleccionado adivina el numero.");
+                    AdivinaElNumero();
+                    break;
+            }
         Console.WriteLine("\n Presiona Enter para volver al menú principal...");
         Console.ReadLine();
 
@@ -129,7 +134,7 @@ namespace randomProgram
 
         }
       }
-        static void ContarEdad()
+      static void ContarEdad()
             {
             int edad;
             Console.Write("Ingrese su edad: ");
@@ -140,6 +145,57 @@ namespace randomProgram
             {
                 Console.WriteLine(i);
             }
-        }
+            Console.WriteLine("\n Has terminado de contar.");
+            Console.WriteLine ("Quiere contar otra vez? (s/n): ");
+            char contarOtraVez = Console.ReadLine()[0];
+            if (contarOtraVez.ToString().ToLower() == "s")
+            {
+                Console.Clear();
+                ContarEdad();
+            }
+            else if (contarOtraVez.ToString().ToLower() == "n")
+            {
+                Console.Clear();
+                menuPrincipal();
+            }
+            else
+            {
+                Console.WriteLine("Opción no válida. Escriba 's' para sí o 'n' para no.");
+                Console.Clear();
+            }
+
+      }
+      static void AdivinaElNumero()
+      {
+          bool RespuestaCorrecta = false;
+          int numeroSecreto = new Random().Next(1, 25);
+
+            while (!RespuestaCorrecta)
+            {
+                Console.Write("Adivina el número secreto entre 1 y 25: ");
+                int intento = Convert.ToInt32(Console.ReadLine());
+                if (intento < numeroSecreto)
+                {
+                    Console.WriteLine("Demasiado bajo. Intenta de nuevo.");
+                }
+                else if (intento > numeroSecreto)
+                {
+                    Console.WriteLine("Demasiado alto. Intenta de nuevo.");
+                }
+                else
+                {
+                    Console.WriteLine("¡Felicidades! Has adivinado el número secreto.");
+                    RespuestaCorrecta = true;
+                }
+            }
+
+
+          Console.WriteLine("Funcionalidad de Adivina el número aún no implementada.");
+          Console.WriteLine("Presiona Enter para volver al menú principal...");
+          Console.ReadLine();
+          Console.Clear();
+          menuPrincipal();
+      }
+
     }
 }
