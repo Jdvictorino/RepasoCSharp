@@ -11,7 +11,7 @@
 - Funciones y Métodos.
 
 ## Datos del Estudiante
--Institución: Instituto Tecnológico de las Americas.
+- Institución: Instituto Tecnológico de las Americas.
 - Nombre: Juan D. Victorino Mañon.
 - Carrera: Desarrollo de Software.
 - Matrícula: 2022-0900.
